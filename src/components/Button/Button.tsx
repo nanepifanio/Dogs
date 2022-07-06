@@ -3,10 +3,11 @@ import * as styles from "./ButtonStyle";
 
 type ButtonProps = {
   children: ReactNode;
+  disabled?: boolean;
 };
 
-const Button = ({ children }: ButtonProps) => {
-  return <styles.Button>{children}</styles.Button>;
+const Button = ({ children, disabled }: ButtonProps) => {
+  return <styles.Button disabled={disabled}>{children}</styles.Button>;
 };
 
 export default Button;

@@ -9,14 +9,13 @@ const types: FormTypes = {
     message: "Digite um Email válido",
   },
   password: {
-    regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{3,}/,
-    message:
-      "A senha deve conter no mínimo 3 caracteres, com um dígito, uma...",
+    regex: /\w{3,}/ /* /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{3,}/ */,
+    message: "A senha deve conter no mínimo 3 caracteres",
   },
 };
 
 export const useForm = (
-  type: string /* | boolean para inputs não requisitados */
+  typeSubmited: string /* | boolean para inputs não requisitados */
 ): useFormReturn => {
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -24,10 +23,10 @@ export const useForm = (
   const validate = (value: string): boolean | void => {
     // if ((type as boolean) === false) return true; para inputs não requisitados
     if (value.length === 0) {
-      setError("Preencha o campo");
+      setError("Preencha o campo.");
       return false;
-    } else if (types[type] && !types[type].regex.test(value)) {
-      setError(types[type].message);
+    } else if (types[typeSubmited] && !types[typeSubmited].regex.test(value)) {
+      setError(types[typeSubmited].message);
       return false;
     } else {
       setError(null);
@@ -45,6 +44,7 @@ export const useForm = (
     setValue,
     error,
     onChange,
+    typeSubmited,
     onBlur: () => validate(value),
     validate: () => validate(value),
   };

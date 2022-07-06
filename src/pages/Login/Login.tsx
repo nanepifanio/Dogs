@@ -1,33 +1,34 @@
-import * as styles from "./Styles";
 import { FormEvent } from "react";
-import { useForm } from "../../hooks/useForm";
-import { useSubmit } from "../../hooks/useSubmit";
-import { APIRequests } from "../../types/types";
+// Styles
+import * as styles from "./Styles";
+// Pictures
 import logindogimg from "../../assets/login.jpg";
+// CustomHooks
+import { useForm } from "../../hooks/useForm";
+// Routes
 import LoginRoutes from "../../routes/LoginRoutes";
+// Components
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+// Api
+import { api } from "../../api/api";
 
-const TOKEN_POST: APIRequests = {
-  endpoint: "/jwt-auth/v1/token",
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: {
-    username: "",
-    password: "",
-  },
-};
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Login = () => {
   const username = useForm("username");
   const password = useForm("password");
-  const { error, submit } = useSubmit([username, password], TOKEN_POST);
+  const { setLocalValue } = useLocalStorage("token", "");
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
-    await submit();
+    if (username.validate() && password.validate()) {
+      const { token } = await api.TOKEN_POST(password.value, username.value);
+      setLocalValue(token);
+    } else {
+      username.validate();
+      password.validate();
+    }
   };
 
   return (

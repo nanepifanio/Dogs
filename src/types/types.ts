@@ -16,6 +16,7 @@ export type useFormReturn = {
   value: string;
   setValue: (param: string) => void;
   error: string | null;
+  typeSubmited: string;
   onChange: (param: any) => void;
   onBlur: () => boolean | void;
   validate: () => boolean | void;
@@ -33,9 +34,21 @@ export type APIRequests = {
   };
 };
 
+export type APIPostResponse = {
+  token: string;
+  user_email: string;
+  user_nicename: string;
+  user_display_name: string;
+};
+
 export type useFetchReturn = {
   data: any;
   loading: boolean;
   error: any;
   request: (urlFragment: string, options?: object) => Promise<any>;
+};
+
+export type LocalStorage = {
+  localValue: string | null;
+  setLocalValue: (param: string) => void;
 };
