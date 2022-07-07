@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import { useFetchReturn } from "../types/types";
+import { UseFetchReturn } from "../types/types";
 
 const baseUrl = "https://dogsapi.origamid.dev/json";
 
-export const useFetch = (): useFetchReturn => {
+export const useFetch = (): UseFetchReturn => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useContext, useEffect } from "react";
 // Styles
 import * as styles from "./Styles";
 // Pictures
@@ -10,21 +10,18 @@ import LoginRoutes from "../../routes/LoginRoutes";
 // Components
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-// Api
-import { api } from "../../api/api";
-
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+// Contexts
+import UserContext from "../../context/UserContext";
 
 const Login = () => {
   const username = useForm("username");
   const password = useForm("password");
-  const { setLocalValue } = useLocalStorage("token", "");
+  const { userLogin } = useContext(UserContext);
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     if (username.validate() && password.validate()) {
-      const { token } = await api.TOKEN_POST(password.value, username.value);
-      setLocalValue(token);
+      userLogin(password.value, username.value);
     } else {
       username.validate();
       password.validate();

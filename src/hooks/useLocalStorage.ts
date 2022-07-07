@@ -7,9 +7,12 @@ export const useLocalStorage = (key: string, inicial: string): LocalStorage => {
     return localKey ?? inicial;
   });
 
+  const getLocalValue = (key: string): string | null =>
+    window.localStorage.getItem(key);
+
   useEffect(() => {
     window.localStorage.setItem(key, localValue as string);
   }, [key, localValue]);
 
-  return { localValue, setLocalValue };
+  return { setLocalValue, getLocalValue };
 };

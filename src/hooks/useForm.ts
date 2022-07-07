@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import { FormTypes } from "../types/types";
-import { useFormReturn } from "../types/types";
+import { InputTypes } from "../types/types";
+import { UseFormReturn } from "../types/types";
 
-const types: FormTypes = {
+const types: InputTypes = {
   email: {
     regex:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -16,7 +16,7 @@ const types: FormTypes = {
 
 export const useForm = (
   typeSubmited: string /* | boolean para inputs não requisitados */
-): useFormReturn => {
+): UseFormReturn => {
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 

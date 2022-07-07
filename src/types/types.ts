@@ -1,18 +1,22 @@
-export type InputTypes = {
+// inputs types
+
+export type InputProps = {
   type: string;
   label: string;
   id: string;
   [key: string]: any;
 };
 
-export type FormTypes = {
+export type InputTypes = {
   [key: string]: {
     regex: RegExp;
     message: string;
   };
 };
 
-export type useFormReturn = {
+// custom hook types
+
+export type UseFormReturn = {
   value: string;
   setValue: (param: string) => void;
   error: string | null;
@@ -22,26 +26,7 @@ export type useFormReturn = {
   validate: () => boolean | void;
 };
 
-export type APIRequests = {
-  endpoint: string /* | {photos: '/api/photo';photos_query:string; photo: string} */;
-  method: "GET" | "POST" | "DELETE";
-  headers?: {
-    "Content-Type"?: "application/json";
-    Authorization?: string;
-  };
-  body?: {
-    [key: string]: string;
-  };
-};
-
-export type APIPostResponse = {
-  token: string;
-  user_email: string;
-  user_nicename: string;
-  user_display_name: string;
-};
-
-export type useFetchReturn = {
+export type UseFetchReturn = {
   data: any;
   loading: boolean;
   error: any;
@@ -49,6 +34,29 @@ export type useFetchReturn = {
 };
 
 export type LocalStorage = {
-  localValue: string | null;
   setLocalValue: (param: string) => void;
+  getLocalValue: (param: string) => string | null;
+};
+
+// api response types
+
+export type APITokenPost = {
+  token: string;
+  user_email: string;
+  user_nicename: string;
+  user_display_name: string;
+};
+
+export type APIUserGet = {
+  email: string;
+  id: number;
+  nome: string;
+  username: string;
+};
+
+export type APITokenValidate = {
+  code: string;
+  data: {
+    status: number;
+  };
 };

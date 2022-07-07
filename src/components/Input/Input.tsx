@@ -1,5 +1,5 @@
 import * as styles from "./InputStyles";
-import { InputTypes } from "../../types/types";
+import { InputProps } from "../../types/types";
 
 const Input = ({
   type,
@@ -9,7 +9,7 @@ const Input = ({
   error,
   onBlur,
   onChange,
-}: InputTypes) => {
+}: InputProps) => {
   return (
     <styles.InputStyle>
       <label htmlFor={id}>{label}</label>
