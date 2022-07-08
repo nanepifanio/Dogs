@@ -1,32 +1,32 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const LoginContainer = styled.section`
   display: grid;
-  grid-template-columns: 2fr 1.5fr;
-  gap: 3.125rem;
-  align-items: center;
-`;
-
-export const FormH1 = styled.h1`
-  font-family: serif;
-  font-size: 2rem;
-  position: relative;
+  grid-template-columns: repeat(2, 1fr);
+  min-height: 100vh;
+  gap: 2rem;
 
   &::before {
     content: "";
-    display: inline-block;
-    position: absolute;
-    width: 17px;
-    height: 17px;
-    border-radius: 2px;
-    z-index: -1;
-    bottom: 5px;
-    left: -5px;
-    background-color: #ffb312;
+    display: block;
+    background: url("../src/assets/login.jpg") no-repeat center center;
+    background-size: cover;
+  }
+
+  @media (max-width: 40rem) {
+    grid-template-columns: 1fr;
+
+    &::before {
+      display: none;
+    }
   }
 `;
 
-export const FormArea = styled.form`
-  button {
+export const Forms = styled.div`
+  max-width: 30rem;
+  padding: 1rem;
+
+  @media (max-width: 40rem) {
+    max-width: 100%;
   }
 `;

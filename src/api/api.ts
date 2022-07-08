@@ -1,33 +1,55 @@
-import { APITokenPost, APIUserGet, APITokenValidate } from "../types/types";
-import axios from "axios";
+import { APIRequestType } from "../types/types";
 
 const baseURL = "https://dogsapi.origamid.dev/json";
 
 export const api = {
-  TOKEN_POST: async (
-    password: string,
-    username: string
-  ): Promise<APITokenPost> => {
-    return (
-      await axios.post(`${baseURL}/jwt-auth/v1/token`, { password, username })
-    ).data;
+  TOKEN_POST: (body: object): APIRequestType => {
+    return {
+      url: `${baseURL}/jwt-auth/v1/token`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    };
   },
 
-  USER_GET: async (token: string | null): Promise<APIUserGet> => {
-    return (
-      await axios.get(`${baseURL}/api/user`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    ).data;
+  USER_GET: (token: string | null): APIRequestType => {
+    return {
+      url: `${baseURL}/api/user`,
+      options: {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    };
   },
 
-  TOKEN_VALIDATE_POST: async (
-    token: string | null
-  ): Promise<APITokenValidate> => {
-    return (
-      await axios.post(`${baseURL}/jwt-auth/v1/token/validate`, null, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    ).data;
+  TOKEN_VALIDATE_POST: (token: string | null): APIRequestType => {
+    return {
+      url: `${baseURL}/jwt-auth/v1/token/validate`,
+      options: {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    };
+  },
+
+  USER_POST: (body: object): APIRequestType => {
+    return {
+      url: `${baseURL}/api/user`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    };
   },
 };

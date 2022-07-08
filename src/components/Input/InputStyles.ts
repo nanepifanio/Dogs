@@ -20,9 +20,4 @@ export const InputStyle = styled.div`
       background-color: #fff;
     }
   }
-
-  p {
-    font-size: 0.875rem;
-    color: #f00;
-  }
 `;

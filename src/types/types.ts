@@ -27,10 +27,16 @@ export type UseFormReturn = {
 };
 
 export type UseFetchReturn = {
-  data: any;
+  // data: any;
   loading: boolean;
+  setLoading: (param: boolean) => void;
   error: any;
-  request: (urlFragment: string, options?: object) => Promise<any>;
+  setError: (param: string | null) => void;
+  request: (
+    url: string,
+    options?: object,
+    er?: string
+  ) => Promise<{ response: Response | undefined; json: any }>;
 };
 
 export type LocalStorage = {
@@ -58,5 +64,17 @@ export type APITokenValidate = {
   code: string;
   data: {
     status: number;
+  };
+};
+
+export type APIRequestType = {
+  url: string;
+  options: {
+    method: "POST" | "GET" | "DELETE";
+    headers?: {
+      "Content-Type"?: "application/json";
+      Authorization?: string;
+    };
+    body?: string;
   };
 };

@@ -1,11 +1,12 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { APIUserGet } from "../types/types";
+import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
+import { APITokenPost, APIUserGet  } from "../types/types";
 import { api } from "../api/api";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+
 
 type UserContextType = {
   userData: APIUserGet | null;
   userLogin: (username: string,password: string) => any;
+  userLogout: () => void;
   logged: boolean;
   loading: boolean;
   error: string | null;
@@ -14,6 +15,7 @@ type UserContextType = {
 export const UserContext = createContext<UserContextType>({
   userData: null,
   userLogin: (username,password) => Promise<void>,
+  userLogout: () => null,
   logged: false,
   loading: false,
   error: null
@@ -28,34 +30,68 @@ export const UserStorage = ({ children }: UserContextProps) => {
   const [logged,setLogged] = useState<boolean>(false);
   const [loading,setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { setLocalValue, getLocalValue } = useLocalStorage("token", "");
+
+  const userLogout = useCallback(() => {
+    setUserData(null)
+    setLoading(false)
+    setError(null)
+    setLogged(false)
+    window.localStorage.removeItem('token')
+  },[])
+
 
   useEffect(() => {
     const autoLogin = async () => {
-      if (getLocalValue('token')) {
-        const validateResponse = await api.TOKEN_VALIDATE_POST(getLocalValue('token'))
-        console.log(validateResponse)
+      const token = window.localStorage.getItem('token')
+      if (token) {
+        const {url,options} = api.TOKEN_VALIDATE_POST(token)
+        try {
+          setError(null)
+          setLoading(true)
+          const response = await fetch(url,options)
+          if (!response.ok) throw new Error("Token Inválido!");
+          await getUser(token)
+        } catch (err) {
+          userLogout()
+          setError((err as Error).message)
+        } finally {
+          setLoading(false)
+          setLogged(true)
+        }
       }
     }
     autoLogin();
-  },[])
+  },[userLogout]) 
 
   const getUser = async (tkn: string | null): Promise<void> => {
-    if (tkn) {
-      const userResponse = await api.USER_GET(tkn);
-      setUserData(userResponse)
-      setLogged(true)
-    }
+    const {url,options} = api.USER_GET(tkn)
+    const response = await fetch(url,options)
+    const json: APIUserGet = await response.json()
+    setUserData(json)
+    setLogged(true)
   };
   
   const userLogin = async (username: string, password: string): Promise<void> => {
-    const { token } = await api.TOKEN_POST(password, username);
-    setLocalValue(token);
-    getUser(getLocalValue('token'))
+    const {url,options} = api.TOKEN_POST({username, password})
+    let json: APITokenPost;
+    try {
+      setError(null)
+      setLoading(true)
+      const response = await fetch(url,options)
+      if (!response.ok) throw new Error("Usuário ou Senha inválidos!");
+      json = await response.json()
+      window.localStorage.setItem('token', json.token); 
+      await getUser(json.token)
+    } catch (err) {
+      setError((err as Error).message)
+    } finally {
+      setLoading(false)
+    }
   }
 
+
   return (
-    <UserContext.Provider value={{ userData, userLogin, logged, loading, error }}>
+    <UserContext.Provider value={{ userData, userLogin, userLogout, logged, loading, error }}>
       {children}
     </UserContext.Provider>
   );

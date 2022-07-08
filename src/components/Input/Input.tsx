@@ -1,5 +1,6 @@
 import * as styles from "./InputStyles";
 import { InputProps } from "../../types/types";
+import ShowError from "../ShowError";
 
 const Input = ({
   type,
@@ -20,7 +21,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
       />
-      {error && <p>{error}</p>}
+      <ShowError error={error} />
     </styles.InputStyle>
   );
 };
