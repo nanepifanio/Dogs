@@ -47,6 +47,10 @@ a {
   color: var(--primary-color);
 }
 
+.active svg {
+  fill: #fb1;
+}
+
 .container {
   max-width: 50rem;
   padding: 0 1rem;

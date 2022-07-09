@@ -27,7 +27,7 @@ export type UseFormReturn = {
 };
 
 export type UseFetchReturn = {
-  // data: any;
+  data: any;
   loading: boolean;
   setLoading: (param: boolean) => void;
   error: any;

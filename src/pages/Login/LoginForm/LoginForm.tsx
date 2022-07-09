@@ -1,10 +1,11 @@
 import { FormEvent, useContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import * as styles from "./LoginFormStyles";
 import UserContext from "../../../context/UserContext";
 import { useForm } from "../../../hooks/useForm";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import H1 from "../../../components/H1";
 import ShowError from "../../../components/ShowError";
 
 const LoginForm = () => {
@@ -12,15 +13,11 @@ const LoginForm = () => {
   const password = useForm("password");
   const { userLogin, error, loading, userData, logged } =
     useContext(UserContext);
-  const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     if (username.validate() && password.validate()) {
-      await userLogin(password.value, username.value);
-      if (userData?.nome) {
-        navigate("/user/" + userData.nome);
-      }
+      await userLogin(username.value, password.value);
     } else {
       password.validate();
       username.validate();
@@ -31,12 +28,44 @@ const LoginForm = () => {
     <>
       <div className="animeLeft">
         <styles.FormContainer>
-          <styles.FormH1>Login</styles.FormH1>
+          <H1 title="Login" />
           <form onSubmit={handleSubmit}>
-            <Input id="username" label="Usuário" type="text" {...username} />
-            <Input id="password" label="Senha" type="password" {...password} />
-            {!loading && <Button disabled={loading}>Entrar</Button>}
-            {loading && <Button disabled={loading}>Validando...</Button>}
+            {loading && (
+              <>
+                <Input
+                  id="username"
+                  label="Usuário"
+                  type="text"
+                  disabled={loading}
+                  {...username}
+                />
+                <Input
+                  id="password"
+                  label="Senha"
+                  type="password"
+                  disabled={loading}
+                  {...password}
+                />
+                <Button disabled={loading}>Validando...</Button>
+              </>
+            )}
+            {!loading && (
+              <>
+                <Input
+                  id="username"
+                  label="Usuário"
+                  type="text"
+                  {...username}
+                />
+                <Input
+                  id="password"
+                  label="Senha"
+                  type="password"
+                  {...password}
+                />
+                <Button>Entrar</Button>
+              </>
+            )}
             <ShowError error={error} />
           </form>
           <Link to="recuperar-senha" className="perdeu">
@@ -52,7 +81,7 @@ const LoginForm = () => {
         </styles.FormContainer>
       </div>
 
-      {logged && <Navigate to={"/user/" + userData?.nome} />}
+      {logged && <Navigate to={`/user/${userData?.username}`} />}
     </>
   );
 };

@@ -10,6 +10,7 @@ const Input = ({
   error,
   onBlur,
   onChange,
+  disabled,
 }: InputProps) => {
   return (
     <styles.InputStyle>
@@ -20,6 +21,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        disabled={disabled}
       />
       <ShowError error={error} />
     </styles.InputStyle>

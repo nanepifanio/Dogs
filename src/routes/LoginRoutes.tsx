@@ -5,9 +5,9 @@ import SignIn from "../pages/Login/SignIn";
 
 const LoginRoutes = () => {
   return useRoutes([
-    { path: "/", element: <LoginForm /> },
-    { path: "recuperar-senha", element: <Recover /> },
-    { path: "cadastrar", element: <SignIn /> },
+    { path: "", element: <LoginForm /> },
+    { path: "/recuperar-senha", element: <Recover /> },
+    { path: "/cadastrar", element: <SignIn /> },
   ]);
 };
 

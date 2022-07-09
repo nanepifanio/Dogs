@@ -2,7 +2,6 @@ import { createContext, ReactNode, useCallback, useEffect, useState } from "reac
 import { APITokenPost, APIUserGet  } from "../types/types";
 import { api } from "../api/api";
 
-
 type UserContextType = {
   userData: APIUserGet | null;
   userLogin: (username: string,password: string) => any;
@@ -56,8 +55,9 @@ export const UserStorage = ({ children }: UserContextProps) => {
           setError((err as Error).message)
         } finally {
           setLoading(false)
-          setLogged(true)
         }
+      } else {
+        setLogged(false)
       }
     }
     autoLogin();

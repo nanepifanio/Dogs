@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { UseFetchReturn } from "../types/types";
 
 export const useFetch = (): UseFetchReturn => {
-  // const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -14,14 +14,13 @@ export const useFetch = (): UseFetchReturn => {
         setError(null);
         setLoading(true);
         response = await fetch(url, options);
-        console.log(response);
         if (!response.ok) throw new Error(er);
         json = await response.json();
       } catch (err) {
         json = null;
         setError((err as Error).message);
       } finally {
-        // setData(json);
+        setData(json);
         setLoading(false);
         return { response, json };
       }
@@ -29,5 +28,5 @@ export const useFetch = (): UseFetchReturn => {
     []
   );
 
-  return { /* data, */ loading, setLoading, error, setError, request };
+  return { data, loading, setLoading, error, setError, request };
 };
