@@ -67,14 +67,42 @@ export type APITokenValidate = {
   };
 };
 
+export type APIPhotoGet = {
+  id: number;
+  author: string;
+  title: string;
+  date: string;
+  src: string;
+  acessos: string;
+  idade: string;
+  peso: string;
+  total_coments: string;
+};
+
 export type APIRequestType = {
   url: string;
   options: {
     method: "POST" | "GET" | "DELETE";
+    cache?: "no-store";
     headers?: {
       "Content-Type"?: "application/json";
       Authorization?: string;
     };
-    body?: string;
+    body?: string | FormData;
   };
+};
+
+// post img types
+
+export type PostImgTypes = {
+  preview: string;
+  raw: File;
+};
+
+// get img types
+
+export type GetImgTypes = {
+  page: number;
+  total: number;
+  user: string | number;
 };

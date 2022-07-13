@@ -6,11 +6,15 @@ const types: InputTypes = {
   email: {
     regex:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "Digite um Email válido",
+    message: "Digite um Email válido.",
   },
   password: {
     regex: /\w{3,}/ /* /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{3,}/ */,
-    message: "A senha deve conter no mínimo 3 caracteres",
+    message: "A senha deve conter no mínimo 3 caracteres.",
+  },
+  number: {
+    regex: /^\d+$/,
+    message: "Utilize números apenas.",
   },
 };
 

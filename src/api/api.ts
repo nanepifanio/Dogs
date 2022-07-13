@@ -1,4 +1,4 @@
-import { APIRequestType } from "../types/types";
+import { APIRequestType, GetImgTypes } from "../types/types";
 
 const baseURL = "https://dogsapi.origamid.dev/json";
 
@@ -49,6 +49,39 @@ export const api = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
+      },
+    };
+  },
+
+  PHOTO_POST: (body: FormData, token: string): APIRequestType => {
+    return {
+      url: `${baseURL}/api/photo`,
+      options: {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: body,
+      },
+    };
+  },
+
+  PHOTOS_GET: ({ page, total, user }: GetImgTypes): APIRequestType => {
+    return {
+      url: `${baseURL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`,
+      options: {
+        method: "GET",
+        cache: "no-store",
+      },
+    };
+  },
+
+  PHOTO_GET: (id: number): APIRequestType => {
+    return {
+      url: `${baseURL}/api/photo/${id}`,
+      options: {
+        method: "GET",
+        cache: "no-store",
       },
     };
   },

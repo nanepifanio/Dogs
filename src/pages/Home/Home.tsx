@@ -1,7 +1,12 @@
+import Feed from "../../components/Feed";
 import * as styles from "./HomeStyles";
 
 const Home = () => {
-  return <div>Essa é a Home</div>;
+  return (
+    <styles.HomeFeedSection className="container mainContainer">
+      <Feed />
+    </styles.HomeFeedSection>
+  );
 };
 
 export default Home;
