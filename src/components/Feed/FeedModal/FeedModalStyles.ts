@@ -1,3 +1,17 @@
 import styled from "styled-components";
 
-export const Modal = styled.div``;
+export const Modal = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0px;
+  left: 0px;
+  display: flex;
+  z-index: 1000;
+  padding: 2rem calc(4rem + 0.9375rem) 2rem 4rem;
+
+  @media (max-width: 40rem) {
+    padding: 2rem calc(2rem + 0.9375rem) 2rem 2rem;
+  }
+`;

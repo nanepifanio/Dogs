@@ -1,15 +1,16 @@
 import * as styles from "./FeedPhotosItemStyles";
-import { APIPhotoGet } from "../../../../types/types";
+import { APIPhotosGet } from "../../../../types/types";
+import ImageLoader from "../../../ImageLoader";
 
 type PhotosItemProps = {
-  photo: APIPhotoGet;
-  click: (param: APIPhotoGet) => void;
+  photo: APIPhotosGet;
+  click: (param: APIPhotosGet) => void;
 };
 
 const FeedPhotosItem = ({ photo, click }: PhotosItemProps) => {
   return (
     <styles.PhotosItemLi onClick={() => click(photo)}>
-      <img src={photo.src} alt={photo.title} />
+      <ImageLoader src={photo.src} alt={photo.title} />
       <span>{photo.acessos}</span>
     </styles.PhotosItemLi>
   );

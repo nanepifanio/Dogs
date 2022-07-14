@@ -2,13 +2,13 @@ import * as styles from "./FeedPhotosStyles";
 import { useEffect } from "react";
 import { api } from "../../../api/api";
 import { useFetch } from "../../../hooks/useFetch";
-import { APIPhotoGet } from "../../../types/types";
+import { APIPhotosGet } from "../../../types/types";
 import Loading from "../../Loading";
 import ShowError from "../../ShowError";
 import FeedPhotosItem from "./FeedPhotosItem";
 
 type FeedPhotosProps = {
-  changePhoto: (param: APIPhotoGet) => void;
+  changePhoto: (param: APIPhotosGet) => void;
 };
 
 const FeedPhotos = ({ changePhoto }: FeedPhotosProps) => {
@@ -28,7 +28,7 @@ const FeedPhotos = ({ changePhoto }: FeedPhotosProps) => {
       {loading && <Loading />}
       {data && (
         <styles.FeedPhotosUl className="animeLeft">
-          {(data as APIPhotoGet[]).map((photo) => (
+          {(data as APIPhotosGet[]).map((photo) => (
             <FeedPhotosItem key={photo.id} photo={photo} click={changePhoto} />
           ))}
         </styles.FeedPhotosUl>

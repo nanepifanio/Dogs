@@ -67,16 +67,39 @@ export type APITokenValidate = {
   };
 };
 
-export type APIPhotoGet = {
+export type APIPhotosGet = {
   id: number;
   author: string;
   title: string;
   date: string;
   src: string;
-  acessos: string;
+  acessos: number;
   idade: string;
   peso: string;
   total_coments: string;
+};
+
+export type PhotoCommentsTypes = {
+  comment_ID: string;
+  comment_agent: string;
+  comment_approved: string;
+  comment_author: string;
+  comment_author_IP: string;
+  comment_author_email: string;
+  comment_author_url: string;
+  comment_content: string;
+  comment_date: string;
+  comment_date_gmt: string;
+  comment_karma: string;
+  comment_parent: string;
+  comment_post_ID: string;
+  comment_type: string;
+  user_id: string;
+};
+
+export type APIPhotoGet = {
+  comments: PhotoCommentsTypes[];
+  photo: APIPhotosGet;
 };
 
 export type APIRequestType = {

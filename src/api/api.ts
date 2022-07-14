@@ -85,4 +85,30 @@ export const api = {
       },
     };
   },
+
+  COMMENT_POST: (body: object, token: string, id: number): APIRequestType => {
+    return {
+      url: `${baseURL}/api/comment/${id}`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      },
+    };
+  },
+
+  PHOTO_DELETE: (id: number, token: string): APIRequestType => {
+    return {
+      url: `${baseURL}/api/photo/${id}`,
+      options: {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    };
+  },
 };

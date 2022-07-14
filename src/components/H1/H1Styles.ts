@@ -4,6 +4,7 @@ export const H1Style = styled.h1`
   font-family: var(--typo-second);
   font-size: 2.5rem;
   position: relative;
+  z-index: 800;
   text-transform: capitalize;
 
   &::before {
