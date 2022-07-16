@@ -111,4 +111,30 @@ export const api = {
       },
     };
   },
+
+  PASSWORD_LOST_POST: (body: object): APIRequestType => {
+    return {
+      url: `${baseURL}/api/password/lost`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    };
+  },
+
+  PASSWORD_RESET_POST: (body: object): APIRequestType => {
+    return {
+      url: `${baseURL}/api/password/reset`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    };
+  },
 };

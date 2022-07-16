@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
-import { APITokenPost, APIUserGet  } from "../types/types";
+import { APITokenPost, APIUserGet, PhotoCommentsTypes  } from "../types/types";
 import { api } from "../api/api";
 
 type UserContextType = {
@@ -9,6 +9,8 @@ type UserContextType = {
   logged: boolean;
   loading: boolean;
   error: string | null;
+  newComment: PhotoCommentsTypes[] ;
+  setNewComment: React.Dispatch<React.SetStateAction<PhotoCommentsTypes[]>>;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -17,7 +19,9 @@ export const UserContext = createContext<UserContextType>({
   userLogout: () => null,
   logged: false,
   loading: false,
-  error: null
+  error: null,
+  newComment: [],
+  setNewComment: () => null
 });
 
 type UserContextProps = {
@@ -29,6 +33,7 @@ export const UserStorage = ({ children }: UserContextProps) => {
   const [logged,setLogged] = useState<boolean>(false);
   const [loading,setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [newComment,setNewComment] = useState<PhotoCommentsTypes[]>([])
 
   const userLogout = useCallback(() => {
     setUserData(null)
@@ -91,7 +96,7 @@ export const UserStorage = ({ children }: UserContextProps) => {
 
 
   return (
-    <UserContext.Provider value={{ userData, userLogin, userLogout, logged, loading, error }}>
+    <UserContext.Provider value={{ userData, userLogin, userLogout, logged, loading, error, newComment, setNewComment }}>
       {children}
     </UserContext.Provider>
   );

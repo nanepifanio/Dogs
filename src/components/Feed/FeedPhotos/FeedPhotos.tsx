@@ -9,18 +9,34 @@ import FeedPhotosItem from "./FeedPhotosItem";
 
 type FeedPhotosProps = {
   changePhoto: (param: APIPhotosGet) => void;
+  user: number | string | undefined;
+  page: number;
+  setInfinite: (param: boolean) => void;
 };
 
-const FeedPhotos = ({ changePhoto }: FeedPhotosProps) => {
+const FeedPhotos = ({
+  changePhoto,
+  user,
+  page,
+  setInfinite,
+}: FeedPhotosProps) => {
   const { data, loading, error, request } = useFetch();
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      const { url, options } = api.PHOTOS_GET({ page: 1, total: 6, user: 0 });
-      await request(url, options);
+      const total = 6;
+      const { url, options } = api.PHOTOS_GET({
+        page,
+        total,
+        user: user as number,
+      });
+      const { response, json } = await request(url, options);
+      if (response && response.ok && json.length < total) {
+        setInfinite(false);
+      }
     };
     fetchPhotos();
-  }, [request]);
+  }, [request, user, page, setInfinite]);
 
   return (
     <div>

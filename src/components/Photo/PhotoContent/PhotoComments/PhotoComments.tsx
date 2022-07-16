@@ -7,9 +7,10 @@ import PhotoCommentsForm from "./PhotoCommentsForm";
 type PhotoCommentsProps = {
   comments: PhotoCommentsTypes[];
   id: number;
+  single?: boolean;
 };
 
-const PhotoComments = ({ id, comments }: PhotoCommentsProps) => {
+const PhotoComments = ({ id, comments, single }: PhotoCommentsProps) => {
   const [showComments, setShowComments] =
     useState<PhotoCommentsTypes[]>(comments);
   const commentsSection = useRef<HTMLUListElement>(null);
@@ -24,7 +25,7 @@ const PhotoComments = ({ id, comments }: PhotoCommentsProps) => {
 
   return (
     <>
-      <styles.PhotoCommentsUl ref={commentsSection}>
+      <styles.PhotoCommentsUl ref={commentsSection} single={single}>
         {showComments.map((comment) => (
           <li key={comment.comment_ID}>
             <strong>{comment.comment_author}: </strong>
@@ -32,7 +33,13 @@ const PhotoComments = ({ id, comments }: PhotoCommentsProps) => {
           </li>
         ))}
       </styles.PhotoCommentsUl>
-      {logged && <PhotoCommentsForm id={id} showComments={setShowComments} />}
+      {logged && (
+        <PhotoCommentsForm
+          id={id}
+          showComments={setShowComments}
+          single={single}
+        />
+      )}
     </>
   );
 };

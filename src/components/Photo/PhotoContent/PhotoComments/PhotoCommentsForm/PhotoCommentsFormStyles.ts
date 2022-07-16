@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const CommentForm = styled.form`
+type CommentFormProps = {
+  single?: boolean;
+};
+
+export const CommentForm = styled.form<CommentFormProps>`
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: stretch;
-  margin: 1rem;
+  margin: ${({ single }) => (single ? "1rem 0rem" : "1rem")}; ;
 `;
 
 export const CommentTextArea = styled.textarea`

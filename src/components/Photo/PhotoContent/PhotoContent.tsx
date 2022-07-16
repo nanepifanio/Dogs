@@ -3,24 +3,38 @@ import { Link } from "react-router-dom";
 import { APIPhotoGet } from "../../../types/types";
 import H1 from "../../H1";
 import PhotoComments from "./PhotoComments";
-import { useContext } from "react";
+import { useContext, useLayoutEffect, useRef } from "react";
 import UserContext from "../../../context/UserContext";
 import PhotoDelete from "../PhotoDelete";
 import ImageLoader from "../../ImageLoader";
+import useMedia from "../../../hooks/useMedia";
 
 type PhotoContentProps = {
   data: APIPhotoGet;
+  single?: boolean;
 };
 
-const PhotoContent = ({ data: { photo, comments } }: PhotoContentProps) => {
-  const { userData } = useContext(UserContext);
+const PhotoContent = ({
+  data: { photo, comments },
+  single,
+}: PhotoContentProps) => {
+  const { userData, newComment } = useContext(UserContext);
+  const match = useMedia("64rem");
+  const containerSection = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const { current } = containerSection;
+    if (current && match) {
+      current.scrollTop = current.scrollHeight;
+    }
+  }, [newComment]);
 
   return (
-    <styles.PhotoContentContainer>
-      <styles.ContentImgArea>
+    <styles.PhotoContentContainer ref={containerSection} single={single}>
+      <styles.ContentImgArea single={single}>
         <ImageLoader src={photo.src} alt={photo.title} />
       </styles.ContentImgArea>
-      <styles.ContentDetailsArea>
+      <styles.ContentDetailsArea single={single}>
         <div>
           <styles.ContentAuthor>
             {userData && userData.username === photo.author ? (
@@ -41,7 +55,7 @@ const PhotoContent = ({ data: { photo, comments } }: PhotoContentProps) => {
           </styles.ContentAttributeAreas>
         </div>
       </styles.ContentDetailsArea>
-      <PhotoComments id={photo.id} comments={comments} />
+      <PhotoComments id={photo.id} comments={comments} single={single} />
     </styles.PhotoContentContainer>
   );
 };

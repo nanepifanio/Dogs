@@ -1,12 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const PhotoContentContainer = styled.div`
+type PhotoContentProps = {
+  single?: boolean;
+};
+
+export const PhotoContentContainer = styled.div<PhotoContentProps>`
   margin: auto;
-  height: 36rem;
+  height: ${({ single }) => (single ? "auto" : "36rem")};
   border-radius: 0.2rem;
   background-color: #fff;
   display: grid;
-  grid-template-columns: 36rem 20rem;
+  grid-template-columns: ${({ single }) => (single ? "1fr" : "36rem 20rem")};
   grid-template-rows: auto 1fr auto;
   overflow: hidden;
   opacity: 0;
@@ -28,16 +32,24 @@ export const PhotoContentContainer = styled.div`
   }
 `;
 
-export const ContentImgArea = styled.div`
-  grid-row: 1/4;
+export const ContentImgArea = styled.div<PhotoContentProps>`
+  grid-row: ${({ single }) => (single ? "1" : "1 / 4")};
+
+  ${({ single }) =>
+    single &&
+    css`
+      border-radius: 0.4rem;
+      overflow: hidden;
+    `}
 
   @media (max-width: 64rem) {
     grid-row: 1;
   }
 `;
 
-export const ContentDetailsArea = styled.div`
-  padding: 2rem 2rem 0rem 2rem;
+export const ContentDetailsArea = styled.div<PhotoContentProps>`
+  padding: ${({ single }) =>
+    single ? "1rem 0rem 0rem 0rem" : "2rem 2rem 0rem 2rem"}; ;
 `;
 
 export const ContentSpan = styled.span`
