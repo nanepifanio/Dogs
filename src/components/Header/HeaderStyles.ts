@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import userIcon from "../../assets/usuario.svg";
 
 export const HeaderContainer = styled.header`
   box-shadow: 0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.1);
@@ -24,7 +25,7 @@ export const HeaderNav = styled.nav`
       display: inline-block;
       width: 0.875rem;
       height: 1.0625rem;
-      background: url("../../src/assets/usuario.svg") no-repeat center center;
+      background: url(${userIcon}) no-repeat center center;
       margin-left: 0.5rem;
       position: relative;
       top: -0.0625rem;

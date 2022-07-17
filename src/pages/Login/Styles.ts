@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import login from "../../assets/login.jpg";
 
 export const LoginContainer = styled.section`
   display: grid;
@@ -9,7 +10,7 @@ export const LoginContainer = styled.section`
   &::before {
     content: "";
     display: block;
-    background: url("../../src/assets/login.jpg") no-repeat center center;
+    background: url(${login}) no-repeat center center;
     background-size: cover;
   }
 

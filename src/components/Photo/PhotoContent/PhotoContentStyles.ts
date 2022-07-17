@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import visualizacao_black from "../../../assets/visualizacao-black.svg";
 
 type PhotoContentProps = {
   single?: boolean;
@@ -63,7 +64,7 @@ export const ContentSpan = styled.span`
     width: 16px;
     height: 10px;
     margin-right: 0.5rem;
-    background: url("../../../src/assets/visualizacao-black.svg");
+    background: url(${visualizacao_black});
   }
 `;
 
