@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import views from "../../../../assets/visualizacao.svg";
 
 export const PhotosItemLi = styled.li`
   display: grid;
@@ -26,7 +27,7 @@ export const PhotosItemLi = styled.li`
       height: 16px;
       display: inline-block;
       margin-right: 0.25rem;
-      background: url("../../../src/assets/visualizacao.svg") no-repeat;
+      background: url(${views}) no-repeat;
     }
   }
 

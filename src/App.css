@@ -77,3 +77,11 @@ a {
 .VictoryContainer {
   height: initial !important;
 }
+
+.empty {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b8b4b4;
+}

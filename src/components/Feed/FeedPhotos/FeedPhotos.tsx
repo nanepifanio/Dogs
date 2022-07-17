@@ -42,12 +42,15 @@ const FeedPhotos = ({
     <div>
       {error && <ShowError error={error} />}
       {loading && <Loading />}
-      {data && (
+      {data && !!(data as APIPhotosGet[]).length && (
         <styles.FeedPhotosUl className="animeLeft">
           {(data as APIPhotosGet[]).map((photo) => (
             <FeedPhotosItem key={photo.id} photo={photo} click={changePhoto} />
           ))}
         </styles.FeedPhotosUl>
+      )}
+      {data && !(data as APIPhotosGet[]).length && !loading && (
+        <p className="empty">Nenhuma foto para exibir.</p>
       )}
     </div>
   );
