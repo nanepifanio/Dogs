@@ -9,7 +9,7 @@ export const LoginContainer = styled.section`
   &::before {
     content: "";
     display: block;
-    background: url("./assets/login.jpg") no-repeat center center;
+    background: url("./src/assets/login.jpg") no-repeat center center;
     background-size: cover;
   }
 
