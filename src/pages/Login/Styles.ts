@@ -9,8 +9,7 @@ export const LoginContainer = styled.section`
   &::before {
     content: "";
     display: block;
-    background: url("../dogs-six-drab.vercel.app/assets/login.jpg") no-repeat
-      center center;
+    background: url("./assets/login.jpg") no-repeat center center;
     background-size: cover;
   }
 
