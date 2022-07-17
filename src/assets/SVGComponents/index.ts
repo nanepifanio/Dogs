@@ -1,3 +1,3 @@
-import SVGComponents from "./SVGComponents";
+import * as SVGComponents from "./SVGComponents";
 
 export default SVGComponents;
