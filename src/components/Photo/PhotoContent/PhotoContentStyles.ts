@@ -63,7 +63,7 @@ export const ContentSpan = styled.span`
     width: 16px;
     height: 10px;
     margin-right: 0.5rem;
-    background: url("../../src/assets/visualizacao-black.svg");
+    background: url("../dogs-six-drab.vercel.app/assets/visualizacao-black.svg");
   }
 `;
 
