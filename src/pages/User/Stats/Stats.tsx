@@ -26,7 +26,7 @@ const Stats = () => {
     <>
       {loading && <Loading />}
       {error && <ShowError error={error} />}
-      {data && (
+      {data && !!(data as APIStatsGet[]).length && (
         <Suspense fallback={<div></div>}>
           <Head
             title={username + " | Estatísticas"}
@@ -34,6 +34,9 @@ const Stats = () => {
           />
           <UserStatsGraphs data={data as APIStatsGet[]} />
         </Suspense>
+      )}
+      {data && !(data as APIStatsGet[]).length && !loading && (
+        <p className="empty">Nenhuma estatística para exibir.</p>
       )}
     </>
   );
