@@ -9,6 +9,7 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import ShowError from "../../../components/ShowError";
 import { api } from "../../../api/api";
+import Head from "../../../components/Head";
 
 const PostPictures = () => {
   const [img, setImg] = useState<PostImgTypes | null>(null);
@@ -57,6 +58,10 @@ const PostPictures = () => {
 
   return (
     <styles.PostPictureContainer className="animeLeft">
+      <Head
+        title={username + " | Postar Foto"}
+        description={`Página de postar foto do usuário ${username}`}
+      />
       <form onSubmit={handleSubmit}>
         {!loading && (
           <>

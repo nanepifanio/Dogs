@@ -11,9 +11,9 @@ type UserRoutesProps = {
 
 const UserRoutes = ({ user }: UserRoutesProps) => {
   return useRoutes([
-    { path: "", element: <Feed user={user?.id} /> },
-    { path: "estatisticas", element: <Stats /> },
-    { path: "postar", element: <PostPictures /> },
+    { path: "/", element: <Feed user={user?.id} /> },
+    { path: "/estatisticas", element: <Stats /> },
+    { path: "/postar", element: <PostPictures /> },
     { path: "*", element: <NotFound /> },
   ]);
 };

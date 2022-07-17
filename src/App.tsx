@@ -6,13 +6,13 @@ import Header from "./components/Header";
 
 const App = () => {
   return (
-    <>
+    <styles.AppDiv>
       <Header />
       <styles.AppContainer>
         <AppRoutes />
-        <Footer />
       </styles.AppContainer>
-    </>
+      <Footer />
+    </styles.AppDiv>
   );
 };
 

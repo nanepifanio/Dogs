@@ -5,6 +5,7 @@ import UserRoutes from "../../routes/UserRoutes";
 import H1 from "../../components/H1";
 import UserHeaderNav from "../../components/UserHeaderNav";
 import UserContext from "../../context/UserContext";
+import Head from "../../components/Head";
 
 const User = () => {
   const [title, setTitle] = useState<string>("");
@@ -32,6 +33,7 @@ const User = () => {
 
   return (
     <styles.Container className="container">
+      <Head title={username} description={`Página do usuário ${username}`} />
       <styles.UserHeader>
         <H1 title={title} />
         <UserHeaderNav />

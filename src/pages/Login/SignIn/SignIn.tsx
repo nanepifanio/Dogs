@@ -9,6 +9,7 @@ import Button from "../../../components/Button";
 import H1 from "../../../components/H1";
 import ShowError from "../../../components/ShowError";
 import { api } from "../../../api/api";
+import Head from "../../../components/Head";
 
 const SignIn = () => {
   const username = useForm("username");
@@ -40,6 +41,7 @@ const SignIn = () => {
 
   return (
     <>
+      <Head title="Cadastro" description="Página de cadastro." />
       <div className="animeLeft">
         <H1 title="Cadastrar" />
         <form onSubmit={handleSubmit}>

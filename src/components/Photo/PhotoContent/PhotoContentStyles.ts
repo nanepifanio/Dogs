@@ -24,12 +24,16 @@ export const PhotoContentContainer = styled.div<PhotoContentProps>`
     }
   }
 
-  @media (max-width: 64rem) {
-    height: auto;
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
-    grid-template-columns: minmax(20rem, 40rem);
-  }
+  ${({ single }) =>
+    !single &&
+    css`
+      @media (max-width: 64rem) {
+        height: auto;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        grid-template-columns: minmax(20rem, 40rem);
+      }
+    `}
 `;
 
 export const ContentImgArea = styled.div<PhotoContentProps>`

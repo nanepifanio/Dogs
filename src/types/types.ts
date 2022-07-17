@@ -102,6 +102,12 @@ export type APIPhotoGet = {
   photo: APIPhotosGet;
 };
 
+export type APIStatsGet = {
+  id: number;
+  title: string;
+  acessos: string;
+};
+
 export type APIRequestType = {
   url: string;
   options: {

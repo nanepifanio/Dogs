@@ -137,4 +137,16 @@ export const api = {
       },
     };
   },
+
+  STATS_GET: (token: string | null): APIRequestType => {
+    return {
+      url: `${baseURL}/api/stats`,
+      options: {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    };
+  },
 };

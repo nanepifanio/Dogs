@@ -73,3 +73,7 @@ a {
 .mainContainer {
   margin-top: 2rem;
 }
+
+.VictoryContainer {
+  height: initial !important;
+}

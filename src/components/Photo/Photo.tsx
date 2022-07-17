@@ -6,6 +6,7 @@ import Loading from "../Loading";
 import ShowError from "../ShowError";
 import PhotoContent from "./PhotoContent";
 import { APIPhotoGet } from "../../types/types";
+import Head from "../Head";
 
 const Photo = () => {
   const { id } = useParams();
@@ -25,6 +26,10 @@ const Photo = () => {
       {loading && <Loading />}
       {data && (
         <section className="container mainContainer">
+          <Head
+            title={(data as APIPhotoGet).photo.title}
+            description={`Página da foto ${(data as APIPhotoGet).photo.title}`}
+          />
           <PhotoContent data={data as APIPhotoGet} single />
         </section>
       )}

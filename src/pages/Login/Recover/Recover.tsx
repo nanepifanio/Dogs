@@ -2,6 +2,7 @@ import { FormEvent } from "react";
 import { api } from "../../../api/api";
 import Button from "../../../components/Button";
 import H1 from "../../../components/H1";
+import Head from "../../../components/Head";
 import Input from "../../../components/Input";
 import ShowError from "../../../components/ShowError";
 import { useFetch } from "../../../hooks/useFetch";
@@ -25,7 +26,11 @@ const Recover = () => {
   };
 
   return (
-    <section>
+    <section className="animeLeft">
+      <Head
+        title="Recuperar Senha"
+        description="Página para recuperar senha."
+      />
       <H1 title="Perdeu a Senha?" />
       {data && <p style={{ color: "#0f0" }}>{data}</p>}
       {!data && (

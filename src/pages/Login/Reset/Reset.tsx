@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../api/api";
 import Button from "../../../components/Button";
 import H1 from "../../../components/H1";
+import Head from "../../../components/Head";
 import Input from "../../../components/Input";
 import ShowError from "../../../components/ShowError";
 import { useFetch } from "../../../hooks/useFetch";
@@ -39,7 +40,11 @@ const Reset = () => {
   };
 
   return (
-    <>
+    <section className="animeLeft">
+      <Head
+        title="Resetar Senha"
+        description="Página para definir nova senha."
+      />
       <H1 title="Resete a Senha" />
       <form onSubmit={handleSubmit}>
         {loading ? (
@@ -66,7 +71,7 @@ const Reset = () => {
         )}
       </form>
       <ShowError error={error} />
-    </>
+    </section>
   );
 };
 

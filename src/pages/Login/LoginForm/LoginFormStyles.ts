@@ -20,6 +20,7 @@ export const FormContainer = styled.div`
 
 export const SignInArea = styled.div`
   margin-top: 3rem;
+  margin-bottom: 4rem;
 
   p {
     margin: 2rem 0;
