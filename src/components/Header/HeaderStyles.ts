@@ -24,7 +24,7 @@ export const HeaderNav = styled.nav`
       display: inline-block;
       width: 0.875rem;
       height: 1.0625rem;
-      background: url("../../src/assets/usuario.svg") no-repeat center center;
+      background: url("../src/assets/usuario.svg") no-repeat center center;
       margin-left: 0.5rem;
       position: relative;
       top: -0.0625rem;
